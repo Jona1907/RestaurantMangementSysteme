@@ -19,6 +19,25 @@ public enum StatutTable {
         return libelle;
     }
 
+    /**
+     * Verifie si la table peut changer de statut
+     */
+
+    public boolean peutPasserA(StatutTable nouveauStatut){
+        switch (this){
+            case LIBRE:
+                return nouveauStatut == OCCUPEE || nouveauStatut == RESERVEE;
+
+            case RESERVEE:
+                return nouveauStatut == OCCUPEE;
+
+            case OCCUPEE:
+                return nouveauStatut == LIBRE;
+
+            default:
+                return false;
+        }
+    }
 
     @Override
     public String toString() {
