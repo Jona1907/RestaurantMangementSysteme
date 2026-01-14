@@ -1,32 +1,23 @@
 package enums;
 
 /**
- * Enumeration gerer l'etat d'une table
+ * Représente l'état d'une table dans le restaurant.
  */
 public enum StatutTable {
 
-    LIBRE("Libre"),
-    OCCUPEE("Occupée"),
-    RESERVEE("Reservée");
-
-    private final String libelle;
-
-    StatutTable(String libelle){
-        this.libelle = libelle;
-    }
-
-    public String getLibelle(){
-        return libelle;
-    }
+    LIBRE,
+    RESERVEE,
+    OCCUPEE;
 
     /**
-     * Verifie si la table peut changer de statut
+     * Vérifie si la transition vers un nouveau statut est autorisée.
      */
+    public boolean peutPasserA(StatutTable nouveauStatut) {
 
-    public boolean peutPasserA(StatutTable nouveauStatut){
-        switch (this){
+        switch (this) {
+
             case LIBRE:
-                return nouveauStatut == OCCUPEE || nouveauStatut == RESERVEE;
+                return nouveauStatut == RESERVEE || nouveauStatut == OCCUPEE;
 
             case RESERVEE:
                 return nouveauStatut == OCCUPEE;
@@ -37,10 +28,5 @@ public enum StatutTable {
             default:
                 return false;
         }
-    }
-
-    @Override
-    public String toString() {
-        return libelle;
     }
 }
