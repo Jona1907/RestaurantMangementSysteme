@@ -1,18 +1,28 @@
-import models.Cuisinier;
-import models.Personne;
-import models.Serveur;
+import enums.CategorieMenu;
+import enums.StatutCommande;
+import models.ArticleMenu;
+import models.Commande;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
 
-        Personne p1 = new Serveur(1,"Ali");
-        Personne p2 = new Cuisinier(2, "Fatima");
+    public static void main(String[] args) throws Exception {
 
-        p1.afficher();
-        System.out.println("--------------------");
-        p2.afficher();
+        ArticleMenu pizza = new ArticleMenu(1, "Pizza", 8.5, CategorieMenu.PLAT);
+        ArticleMenu cola = new ArticleMenu(2, "Cola", 2.5, CategorieMenu.BOISSON);
 
+        Commande commande = new Commande(1);
+
+        commande.ajouterArticle(pizza);
+        commande.ajouterArticle(cola);
+
+        commande.afficher();
+
+        commande.changerStatut(StatutCommande.EN_PREPARATION);
+        commande.changerStatut(StatutCommande.PRETE);
+        commande.changerStatut(StatutCommande.SERVIE);
+
+        commande.payer();
+
+        commande.afficher();
     }
 }
